@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"context"
@@ -10,8 +10,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/svc/v1"
 
-	"github.com/amsokol/go-grpc-http-rest-microservice-tutorial/pkg/protocol/grpc"
-	"github.com/amsokol/go-grpc-http-rest-microservice-tutorial/pkg/protocol/rest"
+	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/protocol/grpc"
+	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/protocol/rest"
 )
 
 // Config is configuration for Server

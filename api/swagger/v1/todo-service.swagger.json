@@ -5,8 +5,8 @@
     "version": "1.0",
     "contact": {
       "name": "go-grpc-http-rest-microservice-tutorial project",
-      "url": "https://github.com/amsokol/go-grpc-http-rest-microservice-tutorial",
-      "email": "medium@amsokol.com"
+      "url": "https://github.com/squaresun/go-grpc-http-rest-microservice-tutorial",
+      "email": "medium@squaresun.com"
     }
   },
   "schemes": [
