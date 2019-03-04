@@ -9,9 +9,11 @@ import (
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/api/v1"
-	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/logger"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+
+	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/logger"
+	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/protocol/rest/middleware"
 )
 
 // RunServer runs HTTP/REST gateway
@@ -22,12 +24,14 @@ func RunServer(ctx context.Context, grpcPort, httpPort string) error {
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 	if err := v1.RegisterToDoServiceHandlerFromEndpoint(ctx, mux, "localhost:"+grpcPort, opts); err != nil {
-		logger.Log.Fatal("failed to start HTTP gateway: %v", zap.String("reason", err.Error()))
+		logger.Log.Fatal("failed to start HTTP gateway", zap.String("reason", err.Error()))
 	}
 
 	srv := &http.Server{
-		Addr:    ":" + httpPort,
-		Handler: mux,
+		Addr: ":" + httpPort,
+		// add handler with middleware
+		Handler: middleware.AddRequestID(
+			middleware.AddLogger(logger.Log, mux)),
 	}
 
 	// graceful shutdown
