@@ -15,7 +15,7 @@ import (
 type ctxKeyRequestID int
 
 // RequestIDKey is the key that holds th unique request ID in a request context.
-const RequestIDKey ctxKeyRequestID = 0
+const RequestIDKey ctxKeyRequestID = iota
 
 var (
 	// prefix is const prefix for request ID
