@@ -8,7 +8,7 @@ import (
 
 	// mysql driver
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/svc/v1"
+	v1 "github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/svc/v1"
 
 	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/logger"
 	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/protocol/grpc"
@@ -92,7 +92,8 @@ func RunServer() error {
 
 	// run HTTP gateway
 	go func() {
-		_ = rest.RunServer(ctx, cfg.GRPCPort, cfg.HTTPPort)
+		err := rest.RunServer(ctx, cfg.GRPCPort, cfg.HTTPPort)
+		panic(err)
 	}()
 
 	return grpc.RunServer(ctx, v1API, cfg.GRPCPort)
