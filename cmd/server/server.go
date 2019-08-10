@@ -2,12 +2,12 @@ package main
 
 import (
 	"context"
-	"database/sql"
 	"flag"
 	"fmt"
 
+	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/repo/memory"
+
 	// mysql driver
-	_ "github.com/go-sql-driver/mysql"
 	v1 "github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/svc/v1"
 
 	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/logger"
@@ -72,23 +72,12 @@ func RunServer() error {
 		return fmt.Errorf("failed to initialize logger: %v", err)
 	}
 
-	// add MySQL driver specific parameter to parse date/time
-	// Drop it for another database
-	param := "parseTime=true"
-
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?%s",
-		cfg.DatastoreDBUser,
-		cfg.DatastoreDBPassword,
-		cfg.DatastoreDBHost,
-		cfg.DatastoreDBSchema,
-		param)
-	db, err := sql.Open("mysql", dsn)
+	todoRepo, err := memory.NewToDoDB()
 	if err != nil {
-		return fmt.Errorf("failed to open database: %v", err)
+		return fmt.Errorf("failed to init memory ToDoDB: %v", err)
 	}
-	defer db.Close()
 
-	v1API := v1.NewToDoServiceServer(db)
+	v1API := v1.NewToDoServiceServer(todoRepo)
 
 	// run HTTP gateway
 	go func() {
