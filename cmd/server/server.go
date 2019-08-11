@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/repo/memory"
+	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/repo/memory"
 
 	// mysql driver
 	v1 "github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/svc/v1"

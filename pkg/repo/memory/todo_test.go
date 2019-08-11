@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/hashicorp/go-memdb"
-	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/repo"
+	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/repo"
 )
 
 func TestCRUD(t *testing.T) {

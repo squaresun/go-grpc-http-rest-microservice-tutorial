@@ -3,7 +3,7 @@ package v1
 import (
 	"context"
 
-	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/repo"
+	"github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/repo"
 
 	"github.com/golang/protobuf/ptypes"
 	v1 "github.com/squaresun/go-grpc-http-rest-microservice-tutorial/pkg/api/v1"
